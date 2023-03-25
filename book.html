@@ -47,7 +47,7 @@
 
    <h1 class="heading-title">book your trip!</h1>
 
-   <form action="" method="post" class="book-form">
+   <form action="book_form.php" method="post" class="book-form">
 
       <div class="flex">
          <div class="inputBox">
