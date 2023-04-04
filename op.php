@@ -10,23 +10,26 @@ switch($type) {
   case 'add':
     $name = $_REQUEST['name001'];
     $email = $_REQUEST['email001'];
-    $results = $book_form_dao->add($name, $email);
-    print_r($results);
+    $book_form_dao->add($name, $email);
     break;
 
   case 'delete':
-
-      break;
+    $id = $_REQUEST['id'];
+    $book_form_dao->delete($id);
+    break;
 
   case 'update':
-
-      break;
+    $name = $_REQUEST['name001'];
+    $email = $_REQUEST['email001'];
+    $id  = $_REQUEST['id'];
+    $book_form_dao->update($name, $email, $id);
+    break;
 
   case 'get':
   default:
-      $results = $book_form_dao->get_all();
-      print_r($results);
-      break;
+    $results = $book_form_dao->get_all();
+    print_r($results);
+    break;
 
 }
 
