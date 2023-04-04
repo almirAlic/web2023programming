@@ -11,7 +11,7 @@ Flight::register('review_services', "ReviewServices");
 require_once "routes/Book_FormRoutes.php";
 require_once "routes/ReviewRoutes.php";
 
-Flight::route("/", function(){
+/*Flight::route("/", function(){
   echo "Hello from / route";
 });
 
@@ -57,7 +57,7 @@ Flight::route("PUT /book_form/@id", function($id){
   Flight::json(['message' => "Edit successfully",
                 'data' => Flight::book_form_dao()->update($book_form, $id)
               ]);
-});
+});*/
 
 
 Flight::start();

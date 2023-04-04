@@ -1,6 +1,8 @@
 <?php
 
-require 'BaseServices.php';
+require_once 'BaseServices.php';
+require_once __DIR__."/../dao/reviewtableDao.class.php";
+
 
 class ReviewServices extends BaseService{
   

@@ -8,11 +8,6 @@ class book_formDao extends BaseDao{
      parent::__construct("book_form");
   }
 
-  public function get_all(){
-    return parent::get_all();
-  }
-
-
 }
 ?>
 
