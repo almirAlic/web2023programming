@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-require "../vendor/autoload.php";
+require "./vendor/autoload.php";
 require "services/UserServices.php";
 require "services/BookingServices.php";
 require "services/TodoServices.php";

@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 function loadTodos() {
     $.ajax({
-        url: 'http://localhost/web2023programming-main/rest/todos',
+        url: 'https://bookingtrips-b98c7c869cca.herokuapp.com/todos',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -60,7 +60,7 @@ function displayTodos(todos) {
 
 function addTodoAJAX(todo) {
     $.ajax({
-        url: 'http://localhost/web2023programming-main/rest/add_todo',
+        url: 'https://bookingtrips-b98c7c869cca.herokuapp.com/add_todo',
         type: 'POST',
         data: todo,
         dataType: 'json',

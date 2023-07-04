@@ -10,7 +10,7 @@ var UserService = {
     },
     register: function (entity) {
         $.ajax({
-            url: "http://localhost/web2023programming-main/rest/register",
+            url: "https://bookingtrips-b98c7c869cca.herokuapp.com/register",
             type: "POST",
             data: JSON.stringify(entity),
             contentType: "application/json",
