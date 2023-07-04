@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+
+   <!-- swiper css link  -->
+   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+   <style>
+      .dashboard {
+         display: none;
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- header section starts  -->
+
+   <section class="header">
+
+      <a href="home.html" class="logo">travel.</a>
+
+      <nav class="navbar">
+         <a href="home.html">home</a>
+         <a href="about.html">about</a>
+         <a href="package.html">package</a>
+         <a href="book.html">book</a>
+         <a href="dashboard.html" class="dashboard">dashboard</a>
+         <a href="register.html" class="register">register</a>
+      </nav>
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+
+   </section>
+
+   <!-- header section ends -->
+
+   <div class="heading" style="background:url(images/header-bg-1.png) no-repeat">
+      <h1>Register Now</h1>
+   </div>
+
+   <!-- booking section starts  -->
+
+   <section class="booking">
+
+      <h1 class="heading-title">Let's get started!</h1>
+
+      <form id="register-form"class="book-form">
+         <div class="flex">
+            <div class="inputBox">
+               <span>name :</span>
+               <input type="text" placeholder="enter your name" maxlength="30" name="name">
+            </div>
+            <div class="inputBox">
+               <span>email :</span>
+               <input type="email" maxlength="50" placeholder="enter your email" name="email">
+            </div>
+            <div class="inputBox">
+               <span>Password</span>
+               <input type="password" placeholder="enter your password" name="password">
+            </div>
+         </div>
+         <input type="submit" value="submit" class="btn">
+      </form>
+      <div style="display: flex; margin-top: 20px; justify-content: center;">
+         <h1>Already have an account?</h1>
+         <div style="margin-left: 15px; margin-top: -4px;">
+            <a href="login.html" style="font-size: 18px; cursor: pointer;">
+               <p>Login</p>
+            </a>
+         </div>
+      </div>
+   </section>
+
+   <!-- booking section ends -->
+
+   <!-- footer section starts  -->
+
+   <section class="footer">
+
+      <div class="box-container">
+
+         <div class="box">
+            <h3>quick links</h3>
+            <a href="home.html"> <i class="fas fa-angle-right"></i> home</a>
+            <a href="about.html"> <i class="fas fa-angle-right"></i> about</a>
+            <a href="package.html"> <i class="fas fa-angle-right"></i> package</a>
+            <a href="book.html"> <i class="fas fa-angle-right"></i> book</a>
+         </div>
+
+         <div class="box">
+            <h3>extra links</h3>
+            <a href="#"> <i class="fas fa-angle-right"></i> ask questions</a>
+            <a href="#"> <i class="fas fa-angle-right"></i> about us</a>
+            <a href="#"> <i class="fas fa-angle-right"></i> privacy policy</a>
+            <a href="#"> <i class="fas fa-angle-right"></i> terms of use</a>
+         </div>
+
+         <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
+            <a href="#"> <i class="fas fa-map"></i> mumbai, india - 400104 </a>
+         </div>
+
+         <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+         </div>
+
+      </div>
+
+      <div class="credit"> created by <span>mr. web designer</span> | all rights reserved! </div>
+
+   </section>
+
+   <script src="./js/calls/user-service.js"></script>
+   <script>
+      $(document).ready(function () {
+         UserService.init();
+      });
+   </script>
+
+   <!-- swiper js link  -->
+   <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+   <!-- custom js file link  -->
+   <script src="js/script.js"></script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function() {
+         var userToken = localStorage.getItem("user_token");
+         var dashboardLink = document.querySelector(".dashboard");
+         var registerLink = document.querySelector(".register");
+         
+         if (userToken) {
+            dashboardLink.style.display = "inline-block";
+            registerLink.style.display = "none";
+         } else {
+            dashboardLink.style.display = "none";
+            registerLink.style.display = "inline-block";
+         }
+      });
+   </script>
+</body>
+
+</html>

@@ -1,64 +1,65 @@
 <?php
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header("Access-Control-Allow-Headers: Content-Type, Authorization, userToken");
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 require "../vendor/autoload.php";
-require "dao/book_formDao.class.php";
-require "dao/ReviewDao.class.php";
-require "services/Book_FormServices.php";
-require "services/ReviewServices.php";
+require "services/UserServices.php";
+require "services/BookingServices.php";
+require "services/TodoServices.php";
+require "services/CustomerServices.php";
+require "services/FavouriteServices.php";
 
-Flight::register('book_form_services', "Book_FormServices");
-Flight::register('review_services', "ReviewServices");
+Flight::register('user_services', "UserServices");
+Flight::register('booking_services', "BookingServices");
+Flight::register('todo_services', "TodoServices");
+Flight::register('customer_services', "CustomerServices");
+Flight::register('favourite_services', "FavouriteServices");
 
-require_once "routes/Book_FormRoutes.php";
-require_once "routes/ReviewRoutes.php";
+require_once "routes/UserRoutes.php";
+require_once "routes/BookingRoutes.php";
+require_once "routes/TodoRoutes.php";
+require_once "routes/CustomerSupportRoutes.php";
+require_once "routes/FavouriteRoutes.php";
 
-/*Flight::route("/", function(){
-  echo "Hello from / route";
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('HTTP/1.1 200 OK');
+    exit;
+}
+
+$secretKey = bin2hex(random_bytes(32));
+Flight::set('jwt_secret', $secretKey);
+
+// Middleware to verify JWT token
+Flight::route('/*', function() {
+    $request = Flight::request();
+    $data = $request->data->getData();
+    $path = Flight::request()->url;
+    if ($path == '/login' || $path == '/docs.json') return TRUE; 
+
+    $bookingService = new BookingService(new BookingDao());
+    try {
+        $booking = $bookingService->createBooking($data);
+        Flight::json($booking);
+    } catch (Exception $e) {
+        Flight::json(['error' => $e->getMessage()], 400);
+    }
 });
 
-Flight::route("GET /book_form", function(){
-  //$book_form_dao = new book_formDao();
-  //$results = Flight::book_form_dao()->get_all();
-  Flight::json(Flight::book_form_dao()->get_all());
-
+/* REST API documentation endpoint */
+Flight::route('GET /docs.json', function(){
+    $openapi = \OpenApi\scan('routes');
+    header('Content-Type: application/json');
+    echo $openapi->toJson();
 });
-
-Flight::route("GET /book_form_by_id", function(){
-  Flight::json(Flight::book_form_dao()->get_by_id(Flight::request()->query['id']));
-
-});
-
-Flight::route("GET /book_form/@id", function($id){
-  //$book_form_dao = new book_formDao();
-  //$results = $book_form_dao->get_by_id($id);
-  Flight::json(Flight::book_from_dao()->get_by_id($id));
-
-});
-
-Flight::route("POST /book_form", function(){
-  //$book_form_dao = new book_formDao();
-  $request = Flight::request()->data->getData();
-  //$book_form_dao->add($request);
-  Flight::json(['message' => "Added successfully",
-                'data' => Flight::book_form_dao()->add($request)
-              ]);
-});
-
-Flight::route("DELETE /book_form/@id", function($id){
-  //$book_form_dao = new book_formDao();
-  Flight::book_form_dao()->delete($id);
-  Flight::json(['message' => "Deleted successfully"]);
-
-});
-
-Flight::route("PUT /book_form/@id", function($id){
-  //$book_form_dao = new book_formDao();
-  $book_form = Flight::request()->data->getData();
-  //$response = $book_form_dao->update($book_form, $id);
-  Flight::json(['message' => "Edit successfully",
-                'data' => Flight::book_form_dao()->update($book_form, $id)
-              ]);
-});*/
-
 
 Flight::start();
 
